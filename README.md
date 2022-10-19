@@ -1,27 +1,19 @@
 # Linkify
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6.
+Angular, Tailwind-CSS, external package for colour picker
 
-## Development server
+My first serious project started from scratch.
+Made for portfolio and own usage.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Also you can find flutter mobile app for Linkify:
+https://github.com/SavchenkoIllya/Linkify-flutter-app
 
-## Code scaffolding
+And backend part of this project:
+https://github.com/SavchenkoIllya/Linkify-app-server
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+All project was made on stack:
+Angular, MongoDB, NodeJS, Express, Flutter
 
-## Build
+Idea of this app to save links with preview. Like a small notation app with elements of social network.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Lot's of optimization in progress and some reworks in plans.
