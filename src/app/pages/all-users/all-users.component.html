@@ -1,0 +1,55 @@
+<div class="flex justify-center border-b border-gray-200">
+  <div
+    class="flex px w-full justify-around items-center py-4 max-w-[800px] align-middle"
+  >
+    <div class="flex flex-row items-center">
+      <img
+        routerLink="/user/{{ UserService.currentUser?.userId }}"
+        class="bg-gray-300 w-[40px] h-[40px] rounded-[50%] object-cover hover:cursor-pointer"
+        src="http://127.0.0.1:8887/{{ UserService.currentUser?.imgUrl }}"
+      />
+      <div class="ml-4">
+        <div class="flex items-baseline">
+          <h2 class="font-bold text-[#1C1C1E]">
+            {{ UserService.currentUser?.username }}
+          </h2>
+        </div>
+        <a
+          class="text-xs text-[#007AFF] hover:cursor-pointer"
+          (click)="UserService.logout()"
+          >Logout</a
+        >
+      </div>
+    </div>
+    <img
+      [cdkCopyToClipboard]="router.url"
+      class="w-5 hover:cursor-pointer"
+      src="../../../assets/BackIcon.svg"
+    />
+  </div>
+</div>
+
+<div
+  class="max-w-[1063px] mx-auto flex mt-10 mb-20 items-start flex-wrap justify-evenly"
+>
+  <div *ngFor="let user of allUsers">
+    <div
+      routerLink="/user/{{ user._id }}"
+      class="flex items-center p-4 mx-4 my-4 bg-white rounded-xl hover:cursor-pointer"
+    >
+      <img
+        *ngIf="user?.imgUrl.length > 0"
+        class="bg-gray-300 w-[40px] h-[40px] rounded-[50%] object-cover"
+        src="http://127.0.0.1:8887/{{ user?.imgUrl }}"
+      />
+      <img
+        *ngIf="user?.imgUrl.length == 0"
+        class="bg-gray-300 w-[40px] h-[40px] rounded-[50%] object-cover"
+        src="../../../assets/DefaultAvatar.svg"
+      />
+      <h2 class="ml-4 font-bold text-[#1C1C1E]">
+        {{ user?.username }}
+      </h2>
+    </div>
+  </div>
+</div>

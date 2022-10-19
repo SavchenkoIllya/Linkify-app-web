@@ -1,0 +1,63 @@
+<div
+  class="rounded-2xl fixed z-30 min-w-[450px] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-center bg-[#F2F2F7] p-8"
+>
+  <p
+    class="text-right text-xs text-[#007AFF] hover:cursor-pointer"
+    (click)="closeModal()"
+  >
+    Close
+  </p>
+  <h2 class="text-xl mt-4 font-bold text-[#1C1C1E]">Add link</h2>
+  <form
+    [formGroup]="linkForm"
+    (submit)="LinkService.createLink(linkForm, categoryData, closeModal())"
+    class="flex flex-col mt-4"
+  >
+    <label class="text-left"> Enter URL </label>
+    <input
+      [formControl]="link"
+      class="outline-none text-[#636366] w-[100%] px-2 py-2 rounded-lg mt-2"
+      type="text"
+    />
+    <p class="text-xs text-[#636366] mt-4 max-w-[450px]">
+      For automaticaly data recivement from link you need reachable link in
+      format "http://www.example.com"
+    </p>
+    <a
+      (click)="LinkService.getLinkData(linkForm, link)"
+      class="text-sm underline underline-offset-1 text-[#007AFF] text-center mt-4 hover:cursor-pointer active:text-[#65afff]"
+      >Get data</a
+    >
+    <div *ngIf="LinkService.linkInfo" class="flex flex-col items-center mt-4">
+      <label class="self-start mt-2"> Link title </label>
+      <input
+        formControlName="title"
+        class="outline-none text-[#636366] w-[100%] px-2 py-2 rounded-lg mt-2"
+        value="{{
+          LinkService.linkInfo.linkData?.siteName
+            ? LinkService.linkInfo.linkData?.siteName +
+              ': ' +
+              LinkService.linkInfo.linkData?.title
+            : '' + LinkService.linkInfo.linkData?.title
+        }}"
+      />
+      <label class="self-start mt-2"> Description </label>
+      <input
+        formControlName="description"
+        class="outline-none text-[#636366] w-[100%] px-2 py-2 rounded-lg mt-2"
+        value="{{ LinkService.linkInfo.linkData?.description }}"
+      />
+      <img
+        *ngIf="LinkService.linkInfo.linkData?.images.length > 0"
+        src="{{ LinkService.linkInfo.linkData?.images[0] }}"
+        class="w-[340px] mt-4 h-[250px] bg-initial object-cover"
+      />
+      <input
+        type="submit"
+        value="Submit"
+        class="bg-[#007AFF] hover:bg-[#59A9FF] font-bold text-white py-2 my-4 mt-8 px-8 rounded-xl"
+      />
+    </div>
+  </form>
+</div>
+<div (click)="closeModal()" class="fixed inset-0 bg-black/[0.3] z-20"></div>

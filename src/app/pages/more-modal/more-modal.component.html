@@ -1,0 +1,28 @@
+<div
+  *ngIf="modal"
+  (click)="modal = !modal"
+  class="block inset-0 fixed w-[100%] h-[100%] hover:cursor-default"
+></div>
+<a
+  (click)="this.modal = !this.modal"
+  class="p-2 inline-block self-auto hover:cursor-pointer"
+>
+  <img class="w-3" src="../../../assets/MoreIcon.svg" />
+  <div *ngIf="this.modal" class="absolute">
+    <div class="bg-white flex flex-col rounded-md">
+      <a
+        (click)="CategoriesService.delete(category)"
+        class="text-xs rounded-t-md hover:bg-gray-50 p-2 text-red-500"
+        >Delete</a
+      >
+      <a
+        (click)="open()"
+        class="text-xs hover:bg-gray-50 p-2 text-[#636366] border-y border-gray-200"
+        >Change</a
+      >
+      <a class="text-xs rounded-b-md hover:bg-gray-50 p-2 text-[#007AFF]"
+        >Share</a
+      >
+    </div>
+  </div>
+</a>

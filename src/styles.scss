@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f2f2f7;
+}
+
+.color-picker {
+  border: none !important;
+  border-radius: 15px;
+
+  .hex-text {
+    .box {
+      div {
+        display: none;
+      }
+    }
+  }
+
+  .cp-ok-button-class {
+    border-radius: 10px;
+    color: white;
+    padding: 5px 20px;
+    background-color: #4a6c91;
+  }
+
+  .type-policy {
+    display: none;
+  }
+}

@@ -1,0 +1,10 @@
+input::file-selector-button {
+  color: #007AFF;
+  padding: 0.5em;
+  border-radius: 0.75rem;
+  border: thin solid #007AFF;
+  margin-right: 16px;
+  &:hover {
+    cursor: pointer;
+  }
+}

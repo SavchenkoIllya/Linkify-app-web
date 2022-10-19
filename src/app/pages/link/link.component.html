@@ -1,0 +1,71 @@
+<div class="flex justify-center border-b border-gray-200">
+  <div
+    class="flex px w-full justify-around items-center py-4 max-w-[800px] align-middle"
+  >
+    <a class="flex hover:cursor-pointer" (click)="navBack()">
+      <img src="../../../assets/chevron.left.svg" class="w-15" />
+      <p class="text-base text-[#007AFF] ml-2">Back</p>
+    </a>
+    <h2 class="font-bold text-[#1C1C1E]">
+      {{ categoryData?.title }} /
+      <span class="text-[#636366] text-xs font-normal"
+        >by {{ categoryData?.authorName }}</span
+      >
+    </h2>
+    <img
+      (click)="changeModal = !changeModal"
+      class="w-15 hover:cursor-pointer"
+      src="../../../assets/Add.svg"
+    />
+  </div>
+</div>
+
+<app-add-link
+  *ngIf="changeModal"
+  [categoryData]="categoryData"
+  [changeModal]="changeModal"
+  (modalChange)="changeModal = $event"
+></app-add-link>
+
+<div
+  class="max-w-[1063px] mx-auto flex mt-10 mb-20 items-start flex-wrap justify-evenly"
+>
+  <h4 *ngIf="!LinkService.links?.length">No links yet</h4>
+  <div
+    *ngFor="let link of LinkService.links"
+    class="mt-4 z-10 flex justify-around bg-white w-[350px] h-[450px] mx-4 p-4 pt-5 pr-5 rounded-xl"
+  >
+    <div class="flex flex-col justify-evenly">
+      <div class="flex justify-between">
+        <h4 class="font-semibold">
+          {{
+            link?.title.length > 30
+              ? link?.title.slice(0, 30).concat("...")
+              : link?.title
+          }}
+        </h4>
+        <img
+          (click)="LinkService.deleteLink(link._id, categoryData._id)"
+          class="w-4 hover:cursor-pointer"
+          src="../../../assets/xmark.svg"
+        />
+      </div>
+      <p class="mt-4 text-[#636366] text-xs">
+        {{
+          link?.description.length > 100
+            ? link?.description.slice(0, 100).concat("...")
+            : link?.description
+        }}
+      </p>
+      <img
+        class="mt-4 w-[340px] h-[250px] object-cover hover:cursor-pointer"
+        src="{{ link?.image }}"
+        (click)="nav(link?.url)"
+      />
+      <div class="flex justify-between mt-4">
+        <p class="text-xs text-[#636366]">29.01.1995</p>
+        <a class="text-xs text-[#007AFF]">Share link</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="flex justify-center border-b border-gray-200">
+  <div
+    class="flex px w-full justify-around items-center py-4 max-w-[800px] align-middle"
+  >
+    <div class="flex flex-row items-center">
+      <img
+        routerLink="/user/{{ UserService.currentUser?.userId }}"
+        class="bg-gray-300 w-[40px] h-[40px] rounded-[50%] object-cover hover:cursor-pointer"
+        src="http://127.0.0.1:8887/{{ UserService.currentUser?.imgUrl }}"
+      />
+      <div class="ml-4">
+        <div class="flex items-baseline">
+          <h2 class="font-bold text-[#1C1C1E]">
+            {{ UserService.currentUser?.username }}
+          </h2>
+        </div>
+        <a
+          class="text-xs text-[#007AFF] hover:cursor-pointer"
+          (click)="UserService.logout()"
+          >Logout</a
+        >
+      </div>
+    </div>
+    <img
+      [cdkCopyToClipboard]="router.url"
+      class="w-5 hover:cursor-pointer"
+      src="../../../assets/BackIcon.svg"
+    />
+  </div>
+</div>
+
+<div
+  *ngIf="!UserService.user?.isOwner"
+  class="flex items-center justify-center"
+>
+  <div class="flex items-center p-4 mt-8 bg-white w-fit rounded-xl">
+    <img
+      *ngIf="UserService.user?.imgUrl.length == 0"
+      class="bg-gray-300 w-[50px] h-[50px] object-cover rounded-[50%]"
+      src="../../../assets/DefaultAvatar.svg"
+    />
+    <img
+      *ngIf="UserService.user?.imgUrl.length > 0"
+      class="bg-gray-300 w-[50px] h-[50px] object-cover rounded-[50%]"
+      src="http://127.0.0.1:8887/{{ UserService.user?.imgUrl }}"
+    />
+    <h2 class="ml-4 font-bold text-[#1C1C1E]">This username</h2>
+  </div>
+</div>
+
+<div class="max-w-[1063px] mx-auto">
+  <div *ngIf="!CategoriesService.categories?.length">
+    <h3 class="font-bold text-[#1C1C1E] text-xl text-center mt-8">
+      This user doesn't have categories yet
+    </h3>
+  </div>
+
+  <div *ngIf="CategoriesService.categories?.length > 0">
+    <h3 class="font-bold text-[#1C1C1E] text-xl text-center mt-8">
+      Categories
+    </h3>
+
+    <div class="flex flex-wrap justify-start">
+      <app-category
+        *ngFor="let category of CategoriesService.categories"
+        [category]="category"
+      ></app-category>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-col items-center justify-center mt-16 align-center">
+  <button
+    *ngIf="UserService.user?.isOwner"
+    (click)="ModalService.newCategoryModal = !ModalService.newCategoryModal"
+    class="bg-[#007AFF] hover:bg-[#59A9FF] font-bold text-white py-2 px-8 rounded-xl"
+  >
+    Create new
+  </button>
+
+  <div class="mt-8" *ngIf="ModalService.newCategoryModal">
+    <form
+      (submit)="
+        CategoriesService.send(newCategoryTitle, color);
+        ModalService.newCategoryModal = !ModalService.newCategoryModal
+      "
+      class="flex flex-col"
+    >
+      <label class="my-2">
+        Category name
+        <input
+          [formControl]="newCategoryTitle"
+          class="outline-none text-[#636366] w-[100%] px-2 py-2 rounded-lg mt-2"
+          type="text"
+          placeholder="Name for your category"
+        />
+      </label>
+      <label class="my-2">
+        Choose category color
+        <input
+          class="outline-none text-[#636366] w-[100%] px-2 py-2 rounded-lg mt-2"
+          [cpOKButton]="true"
+          [(colorPicker)]="color"
+          [style.background]="color"
+        />
+      </label>
+      <p class="text-[#636366] text-xs">
+        Be carefull with putting light colors, name icon is always white
+      </p>
+      <button
+        class="bg-[#34C759] hover:bg-[#4BE371] mt-4 font-bold text-white py-2 px-8 rounded-xl align-center flex items-center justify-center"
+      >
+        Create
+      </button>
+    </form>
+  </div>
+
+  <p class="text-[#636366] mt-10">
+    In community you can find usefull links all over the world for different
+    cases
+  </p>
+  <a
+    routerLink="/allusers"
+    class="bg-[#007AFF] hover:bg-[#59A9FF] hover:cursor-pointer flex p-5 px-16 mt-8 rounded-xl"
+    ><p class="text-white">Community</p>
+    <img class="w-5 ml-4" src="../../../assets/WorldIcon.svg"
+  /></a>
+</div>

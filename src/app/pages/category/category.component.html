@@ -1,0 +1,55 @@
+<div>
+  <div
+    *ngIf="changeModal"
+    (click)="changeModal = !changeModal"
+    class="absolute inset-0 z-0"
+  ></div>
+
+  <div
+    class="relative flex items-start p-4 pt-5 pr-5 mx-8 mt-4 rounded-xl"
+    [ngStyle]="{ 'background-color': category.color }"
+  >
+    <div class="flex flex-col items-center px-8 pr-4">
+      <p
+        (click)="navigation(category)"
+        *ngIf="!changeModal"
+        class="text-white hover:cursor-pointer"
+      >
+        {{ category.title }}
+      </p>
+      <form
+        *ngIf="changeModal"
+        (submit)="
+          CategoriesService.update(category, updateCategoryTitle, color);
+          changeModal = !changeModal
+        "
+        class="flex flex-col hover:cursor-text"
+      >
+        <input
+          class="outline-none text-[#636366] px-2 py-2 rounded-lg mt-2"
+          value="{{ category.title }}"
+          [formControl]="updateCategoryTitle"
+        />
+        <label class="my-2 text-white">
+          Choose new color
+          <input
+            class="outline-none border border-white text-[#636366] px-2 py-2 rounded-lg mt-2"
+            [cpOKButton]="true"
+            [(colorPicker)]="color"
+            [style.background]="color"
+          />
+        </label>
+        <input
+          class="bg-[#34C759] hover:bg-[#4BE371] mt-4 font-bold text-white py-2 px-8 rounded-xl align-center flex items-center justify-center"
+          type="submit"
+          value="Update"
+        />
+      </form>
+    </div>
+    <app-more-modal
+      [changeModal]="changeModal"
+      (modalChange)="changeModal = $event"
+      [category]="category"
+    ></app-more-modal>
+  </div>
+</div>
